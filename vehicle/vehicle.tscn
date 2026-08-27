@@ -2,23 +2,26 @@
 
 [ext_resource type="Script" uid="uid://bwrh36jycv0h8" path="res://vehicle/vehicle.gd" id="1_mhs70"]
 [ext_resource type="Script" uid="uid://ceihq05upkrk0" path="res://vehicle/components/vehicle_steering.gd" id="2_1ktiy"]
+[ext_resource type="Script" uid="uid://b55li762nvpam" path="res://vehicle/fit_collision.gd" id="2_g2dx0"]
 [ext_resource type="ArrayMesh" uid="uid://co7esh1tvaqyl" path="res://vehicle/meshes/scooter.tres" id="2_kuhha"]
 [ext_resource type="Script" uid="uid://btjlitwim3y2e" path="res://vehicle/components/vehicle_engine.gd" id="3_vg162"]
 [ext_resource type="Script" uid="uid://cvyoijmpnysav" path="res://vehicle/controllers/vehicle_controller.gd" id="4_vp2eu"]
 [ext_resource type="Script" uid="uid://dd5fqxmfpx8t0" path="res://vehicle/controllers/player_controller.gd" id="5_raajb"]
 [ext_resource type="Script" uid="uid://ooprwk5buonf" path="res://vehicle/cameras/follow_camera.gd" id="6_raajb"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8ladn"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_6bjwd"]
+size = Vector3(1.0555096, 1.3664412, 1.8476473)
 
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=1211781028]
 script = ExtResource("1_mhs70")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=189522551]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_8ladn")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01161176, 0.066982806, -0.13720357)
+shape = SubResource("BoxShape3D_6bjwd")
+script = ExtResource("2_g2dx0")
 
 [node name="Body" type="MeshInstance3D" parent="." unique_id=1157554020]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, 0, 0, 0)
 mesh = ExtResource("2_kuhha")
 
 [node name="Components" type="Node" parent="." unique_id=806908837]
