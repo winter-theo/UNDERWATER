@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dhmhxu8kixuvo"]
+
+[ext_resource type="Script" uid="uid://cf384bswpde6o" path="res://mission/trigger/mission_trigger.gd" id="1_r36hr"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_eesdn"]
+height = 3.0
+radius = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54k1g"]
+transparency = 1
+blend_mode = 3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_eesdn"]
+material = SubResource("StandardMaterial3D_54k1g")
+top_radius = 3.0
+bottom_radius = 3.0
+height = 3.0
+
+[node name="Area3D" type="Area3D" unique_id=1972507948]
+script = ExtResource("1_r36hr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1528557553]
+shape = SubResource("CylinderShape3D_eesdn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1603136524]
+mesh = SubResource("CylinderMesh_eesdn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
