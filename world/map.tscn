@@ -1,10 +1,8 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://gk23hfqsptpj"]
 
-[ext_resource type="Script" path="res://world/map.gd" id="1_map"]
-
-[ext_resource type="Texture2D" path="res://world/textures/grid_black.png" id="2_grid"]
-
-[ext_resource type="PackedScene" path="res://world/meshes/map_test.glb" id="3_mesh"]
+[ext_resource type="Script" uid="uid://cjjumij08u3ae" path="res://world/map.gd" id="1_map"]
+[ext_resource type="Texture2D" uid="uid://5dc5t5hksjax" path="res://world/textures/grid_black.png" id="2_grid"]
+[ext_resource type="PackedScene" uid="uid://caoqewiughb0u" path="res://world/meshes/map_test.glb" id="3_mesh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sol"]
 albedo_color = Color(0.3, 0.38, 0.42, 1)
@@ -13,7 +11,6 @@ roughness = 0.9
 uv1_scale = Vector3(0.0625, 0.0625, 0.0625)
 uv1_triplanar = true
 uv1_world_triplanar = true
-
 
 [sub_resource type="Environment" id="Environment_map"]
 background_mode = 1
@@ -26,39 +23,31 @@ fog_enabled = true
 fog_light_color = Color(0.1, 0.28, 0.38, 1)
 fog_density = 0.00125
 
-
-[node name="Map" type="Node3D"]
+[node name="Map" type="Node3D" unique_id=578136461]
 script = ExtResource("1_map")
 ground_material = SubResource("StandardMaterial3D_sol")
 
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=881358294]
 environment = SubResource("Environment_map")
 
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1510571169]
 transform = Transform3D(0.866, -0.354, 0.354, 0, 0.707, 0.707, -0.5, -0.612, 0.612, 0, 200, 0)
 light_color = Color(0.8, 0.93, 1, 1)
 light_energy = 1.15
 shadow_enabled = true
 directional_shadow_max_distance = 400.0
 
-
-[node name="Terrain" type="Node3D" parent="."]
+[node name="Terrain" type="Node3D" parent="." unique_id=57598547]
 transform = Transform3D(24, 0, 0, 0, 24, 0, 0, 0, 24, 0, 0, 0)
 
+[node name="MapMesh" parent="Terrain" unique_id=2014102703 instance=ExtResource("3_mesh")]
 
-[node name="MapMesh" parent="Terrain" instance=ExtResource("3_mesh")]
-
-
-[node name="SpawnPoint" type="Marker3D" parent="Terrain"]
+[node name="SpawnPoint" type="Marker3D" parent="Terrain" unique_id=1806509522]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -8.75, 5, -8.75)
 
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1817603597]
 
-[node name="HUD" type="CanvasLayer" parent="."]
-
-
-[node name="Readout" type="Label" parent="HUD"]
+[node name="Readout" type="Label" parent="HUD" unique_id=1277117364]
 offset_left = 18.0
 offset_top = 16.0
 offset_right = 460.0

@@ -15,10 +15,6 @@ run/main_scene="res://world/map.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-Music="*uid://lqfpyl4g3xby"
-
 [display]
 
 window/stretch/mode="canvas_items"
