@@ -6,12 +6,10 @@
 [ext_resource type="Script" uid="uid://cvyoijmpnysav" path="res://vehicle/controllers/vehicle_controller.gd" id="4_vp2eu"]
 [ext_resource type="Script" uid="uid://dd5fqxmfpx8t0" path="res://vehicle/controllers/player_controller.gd" id="5_raajb"]
 [ext_resource type="Script" uid="uid://ooprwk5buonf" path="res://vehicle/cameras/follow_camera.gd" id="6_raajb"]
-[ext_resource type="Script" uid="uid://vbavs3b2wshm" path="res://vehicle/components/vehicle_audio.gd" id="9_fehuk"]
-[ext_resource type="AudioStream" uid="uid://bm2rh8641d7r0" path="res://vehicle/audio/moteur_bas.ogg" id="10_p3bq1"]
 [ext_resource type="Texture2D" uid="uid://d3t88t5ru71n3" path="res://vehicle/textures/Scotter_tex.png" id="11_fehuk"]
-[ext_resource type="AudioStream" uid="uid://ccu6av7itdg5c" path="res://vehicle/audio/moteur_haut.ogg" id="11_jmtuw"]
 [ext_resource type="PackedScene" uid="uid://dogng284a8xwh" path="res://player/player.tscn" id="15_28v1e"]
 [ext_resource type="Script" uid="uid://c7n2qak4air0b" path="res://vehicle/components/vehicle_airborne.gd" id="16_arbn0"]
+[ext_resource type="PackedScene" uid="uid://c3d8bj26scidm" path="res://vehicle/audio/engine/audio_engine.tscn" id="9_6bjwd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6bjwd"]
 size = Vector3(1.0555096, 2.100889, 1.8748903)
@@ -260,9 +258,6 @@ metadata/_custom_type_script = "uid://dd5fqxmfpx8t0"
 script = ExtResource("6_raajb")
 
 [node name="Audio" type="Node3D" parent="." unique_id=1158403663]
-script = ExtResource("9_fehuk")
-low_loop = ExtResource("10_p3bq1")
-high_loop = ExtResource("11_jmtuw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=189522551]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01161176, 0.7016022, -0.42037785)
@@ -310,3 +305,7 @@ metadata/extras = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=147800766]
 root_node = NodePath("")
 libraries/ = SubResource("AnimationLibrary_o83sn")
+
+[node name="SFX" type="Node3D" parent="Audio" unique_id=495987381]
+
+[node name="AudioEngine" parent="Audio" unique_id=929334449 instance=ExtResource("9_6bjwd")]
