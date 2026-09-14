@@ -1,0 +1,38 @@
+[gd_resource type="ArrayMesh" format=4 uid="uid://6m7l1joi1mky"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_joqnj"]
+resource_name = "Mermaid_eyes"
+transparency = 4
+cull_mode = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lynos"]
+_surfaces = [{
+"aabb": AABB(-0.14298621, 1.6243842, 0.17859378, 0.28597242, 0.108772635, 0.058843017),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUA"),
+"name": "Mermaid_eyes",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("mpteEqjNAAD//2nuHkIAAJT6AAAAAAAAI6H/////AABkZF4SqM0AAAAAae4eQgAA217/////AABqBQAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "Mermaid_Mermaid_001"
+_surfaces = [{
+"aabb": AABB(-0.14298621, 1.6243842, 0.17859378, 0.28597242, 0.108772635, 0.058843017),
+"attribute_data": PackedByteArray("//////9//3//////AAAAAP////8AAP9///////9/AAD//////3//f/////8AAAAA//////9/AAD/////AAD/fw=="),
+"format": 34896613407,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUA"),
+"material": SubResource("StandardMaterial3D_joqnj"),
+"name": "Mermaid_eyes",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("mpteEqjNzgP//2nuHkLRA5T6AAAAAO4DI6H/////sQNkZF4SqM2HkQAAae4eQoeR217/////gJFqBQAAAACOkaEGh+uXBoXrlQaC66oGi+sTUmrlBlJz5VtSMuXCUanl")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_lynos")
