@@ -9,7 +9,11 @@
 [ext_resource type="Script" uid="uid://ooprwk5buonf" path="res://vehicle/cameras/follow_camera.gd" id="6_raajb"]
 [ext_resource type="Script" uid="uid://vbavs3b2wshm" path="res://vehicle/components/vehicle_audio.gd" id="9_fehuk"]
 [ext_resource type="AudioStream" uid="uid://bm2rh8641d7r0" path="res://vehicle/audio/moteur_bas.ogg" id="10_p3bq1"]
+[ext_resource type="ArrayMesh" uid="uid://co7esh1tvaqyl" path="res://vehicle/meshes/scooter.tres" id="11_egcsk"]
 [ext_resource type="AudioStream" uid="uid://ccu6av7itdg5c" path="res://vehicle/audio/moteur_haut.ogg" id="11_jmtuw"]
+[ext_resource type="ArrayMesh" uid="uid://qqraokun3uqm" path="res://vehicle/meshes/back_propeller.tres" id="12_28v1e"]
+[ext_resource type="ArrayMesh" uid="uid://cpjfc0m8b7a7e" path="res://vehicle/meshes/front_wheel.tres" id="13_157w3"]
+[ext_resource type="ArrayMesh" uid="uid://dopfjd8s4bexn" path="res://vehicle/meshes/front_blades.tres" id="14_1255d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6bjwd"]
 size = Vector3(1.0555096, 1.3664412, 1.8476473)
@@ -54,3 +58,15 @@ script = ExtResource("6_raajb")
 script = ExtResource("9_fehuk")
 low_loop = ExtResource("10_p3bq1")
 high_loop = ExtResource("11_jmtuw")
+
+[node name="Scooter" type="MeshInstance3D" parent="." unique_id=567351554]
+mesh = ExtResource("11_egcsk")
+
+[node name="BackPropeller" type="MeshInstance3D" parent="Scooter" unique_id=770041339]
+mesh = ExtResource("12_28v1e")
+
+[node name="FrontWheel" type="MeshInstance3D" parent="Scooter" unique_id=745587058]
+mesh = ExtResource("13_157w3")
+
+[node name="FrontBlades" type="MeshInstance3D" parent="Scooter/FrontWheel" unique_id=488406905]
+mesh = ExtResource("14_1255d")

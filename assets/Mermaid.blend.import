@@ -4201,8 +4201,8 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://assets/models/Mermaid_Cube_001.res",
-"save_to_file/path": "uid://ceo6abpkxleh7"
+"save_to_file/fallback_path": "res://vehicle/meshes/front_blades.tres",
+"save_to_file/path": "uid://by14ktnwsf3r4"
 },
 "Mermaid_Cube_003": {
 "generate/lightmap_uv": 0,
@@ -4210,7 +4210,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://assets/models/Mermaid_Cube_003.res",
+"save_to_file/fallback_path": "res://vehicle/meshes/back_propeller.tres",
 "save_to_file/path": "uid://dpa3gv7rhabbe"
 },
 "Mermaid_Cylinder": {
@@ -4255,7 +4255,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://assets/models/Mermaid_Scooter.res",
+"save_to_file/fallback_path": "res://vehicle/meshes/scooter.tres",
 "save_to_file/path": "uid://d6qsw51i6dn7"
 },
 "Mermaid_Scooter_001": {
@@ -4264,8 +4264,8 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://assets/models/Mermaid_Scooter_001.res",
-"save_to_file/path": "uid://b3d6qperb24f2"
+"save_to_file/fallback_path": "res://vehicle/meshes/front_wheel.tres",
+"save_to_file/path": "uid://bn3eqn5b7wkgd"
 }
 }
 }
