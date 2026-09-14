@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dtq45dfa3d6jy"]
+
+[node name="HUD" type="CanvasLayer" unique_id=944124844]
+
+[node name="Readout" type="Label" parent="." unique_id=774092795]
+offset_left = 18.0
+offset_top = 16.0
+offset_right = 460.0
+offset_bottom = 160.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 17
