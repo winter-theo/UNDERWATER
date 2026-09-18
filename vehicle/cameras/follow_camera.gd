@@ -1,16 +1,16 @@
 extends Camera3D
 
 ## Distance horizontale derriere le vehicule.
-@export var distance := 8.0
+@export var distance := 4.0
 
 ## Hauteur au-dessus du vehicule.
 @export var height := 3.0
 
 ## Point vise devant le vehicule. Plus c'est haut, plus tu vois loin en virage.
-@export var look_ahead := 4.0
+@export var look_ahead := 5.0
 
 ## Hauteur du point vise, pour ne pas regarder dans le plancher.
-@export var look_height := 1.0
+@export var look_height := 2.0
 
 ## Rattrapage de la position. Bas = camera molle et cinematique.
 @export var follow_speed := 6.0
