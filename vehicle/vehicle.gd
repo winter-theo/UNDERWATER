@@ -76,7 +76,13 @@ func _physics_process(delta: float) -> void:
 	if grounded and _vertical_speed <= 0.0:
 		velocity.y -= ground_stick
 
+	if is_on_wall():
+		var head_on := -(-global_basis.z).dot(get_wall_normal())
+		if head_on > 0.9:
+			engine.speed *= 1.0 - head_on
+	
 	move_and_slide()
+
 
 
 ## Fait pivoter le vehicule pour que son axe Y suive `up`, en gardant le cap.
