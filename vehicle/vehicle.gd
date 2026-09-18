@@ -11,23 +11,11 @@ extends CharacterBody3D
 ## Fraction du controle de direction conservee en l'air (0 = aucun).
 @export var air_steer_factor := 0.35
 
-## Force qui colle le vehicule au sol dans les descentes. Trop haut = pas de saut.
-@export var ground_stick := 4.0
-
-## Multiplicateur de gravite pendant la MONTEE d'un saut.
-## Bas = tu flottes au sommet, ce qui laisse le temps de viser l'atterrissage.
-@export var gravity_rise := 1.8
-
-## Multiplicateur pendant la CHUTE. Plus haut que gravity_rise donne une
-## retombee seche. C'est le reglage qui separe un saut arcade d'un saut lunaire.
-## La gravite par defaut de Godot (9.8) est realiste, donc molle pour un jeu.
-@export var gravity_fall := 2.8
-
 var _controller: VehicleController
-var _vertical_speed := 0.0
 
 @onready var steering: VehicleSteering = $Components/VehicleSteering
 @onready var engine: VehicleEngine = $Components/VehicleEngine
+@onready var airborne: VehicleAirborne = $Components/VehicleAirborne
 
 
 static func create(controller: VehicleController) -> Vehicle:
@@ -54,35 +42,52 @@ func _physics_process(delta: float) -> void:
 	steering.update(delta, _controller.steer_axis)
 	engine.update(delta, _controller.throttle_axis)
 
-	var grounded := is_on_floor()
 	var yaw := steering.get_yaw_delta(delta, engine.speed, engine.max_speed)
-
-	if grounded:
-		rotate_y(yaw)
-		_align_to(get_floor_normal(), ground_align_speed, delta)
-		# Composante verticale du vecteur de conduite. C'est CA qui te lance
-		# quand tu quittes la rampe : on la garde a jour tant qu'on est au sol,
-		# donc au moment du decollage elle est deja bonne.
-		_vertical_speed = -global_basis.z.y * engine.speed
+	if is_on_floor():
+		_drive_grounded(delta, yaw)
 	else:
-		rotate_y(yaw * air_steer_factor)
-		_align_to(Vector3.UP, air_align_speed, delta)
-		var scale := gravity_rise if _vertical_speed > 0.0 else gravity_fall
-		_vertical_speed += get_gravity().y * scale * delta
+		_drive_airborne(delta, yaw)
 
+	_resolve_motion()
+
+
+## Au sol : on suit la pente et on garde la vitesse de decollage a jour.
+func _drive_grounded(delta: float, yaw: float) -> void:
+	rotate_y(yaw)
+	_align_to(get_floor_normal(), ground_align_speed, delta)
+	# Composante verticale du vecteur de conduite. C'est CA qui te lance
+	# quand tu quittes la rampe : on la garde a jour tant qu'on est au sol,
+	# donc au moment du decollage elle est deja bonne.
+	airborne.sync_launch(-global_basis.z.y * engine.speed)
+
+
+## En l'air : direction attenuee, on se remet a plat et la gravite reprend.
+func _drive_airborne(delta: float, yaw: float) -> void:
+	rotate_y(yaw * air_steer_factor)
+	_align_to(Vector3.UP, air_align_speed, delta)
+	airborne.apply_gravity(delta, get_gravity().y)
+
+
+## Compose la velocite finale depuis le cap et la vitesse verticale, puis bouge.
+func _resolve_motion() -> void:
 	var drive := -global_basis.z * engine.speed
-	velocity = Vector3(drive.x, _vertical_speed, drive.z)
+	velocity = Vector3(drive.x, airborne.vertical_speed, drive.z)
 
-	if grounded and _vertical_speed <= 0.0:
-		velocity.y -= ground_stick
+	if is_on_floor() and airborne.vertical_speed <= 0.0:
+		velocity.y -= airborne.ground_stick
 
-	if is_on_wall():
-		var head_on := -(-global_basis.z).dot(get_wall_normal())
-		if head_on > 0.9:
-			engine.speed *= 1.0 - head_on
-	
+	_apply_wall_impact()
 	move_and_slide()
 
+
+## Freine le moteur quand on percute un mur de face, proportionnellement a
+## l'angle d'incidence : un frottement rasant ne coute presque rien.
+func _apply_wall_impact() -> void:
+	if not is_on_wall():
+		return
+	var head_on := -(-global_basis.z).dot(get_wall_normal())
+	if head_on > 0.9:
+		engine.speed *= 1.0 - head_on
 
 
 ## Fait pivoter le vehicule pour que son axe Y suive `up`, en gardant le cap.

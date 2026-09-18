@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://d3t88t5ru71n3" path="res://vehicle/textures/Scotter_tex.png" id="11_fehuk"]
 [ext_resource type="AudioStream" uid="uid://ccu6av7itdg5c" path="res://vehicle/audio/moteur_haut.ogg" id="11_jmtuw"]
 [ext_resource type="PackedScene" uid="uid://dogng284a8xwh" path="res://player/player.tscn" id="15_28v1e"]
+[ext_resource type="Script" uid="uid://c7n2qak4air0b" path="res://vehicle/components/vehicle_airborne.gd" id="16_arbn0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6bjwd"]
 size = Vector3(1.0555096, 2.100889, 1.8748903)
@@ -239,6 +240,9 @@ acceleration = 30.0
 deceleration = 40.0
 engine_drag = 10.0
 max_speed = 50.0
+
+[node name="VehicleAirborne" type="Node" parent="Components" unique_id=755123044]
+script = ExtResource("16_arbn0")
 
 [node name="Controllers" type="Node" parent="." unique_id=1344128078]
 
