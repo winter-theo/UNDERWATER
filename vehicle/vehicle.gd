@@ -11,11 +11,23 @@ extends CharacterBody3D
 ## Fraction du controle de direction conservee en l'air (0 = aucun).
 @export var air_steer_factor := 0.35
 
+## Inclinaison visuelle max (degres) quand le vehicule tourne a fond.
+@export var visual_bank_angle_deg := 20.0
+
+## Sensibilite : multiplie la vitesse de rotation (rad/s) pour obtenir l'angle cible.
+@export var visual_bank_factor := 0.3
+
+## Vitesse de lissage de l'inclinaison visuelle.
+@export var visual_bank_speed := 6.0
+
 var _controller: VehicleController
 
 @onready var steering: VehicleSteering = $Components/VehicleSteering
 @onready var engine: VehicleEngine = $Components/VehicleEngine
 @onready var airborne: VehicleAirborne = $Components/VehicleAirborne
+
+@onready var visual_player = $Player
+@onready var visual_scooter = $Scooter
 
 
 static func create(controller: VehicleController) -> Vehicle:
@@ -47,7 +59,8 @@ func _physics_process(delta: float) -> void:
 		_drive_grounded(delta, yaw)
 	else:
 		_drive_airborne(delta, yaw)
-
+	
+	_update_visuals(yaw, delta)
 	_resolve_motion()
 
 
@@ -72,10 +85,10 @@ func _drive_airborne(delta: float, yaw: float) -> void:
 func _resolve_motion() -> void:
 	var drive := -global_basis.z * engine.speed
 	velocity = Vector3(drive.x, airborne.vertical_speed, drive.z)
-
+	
 	if is_on_floor() and airborne.vertical_speed <= 0.0:
 		velocity.y -= airborne.ground_stick
-
+	
 	_apply_wall_impact()
 	move_and_slide()
 
@@ -96,10 +109,22 @@ func _align_to(up: Vector3, speed: float, delta: float) -> void:
 	# Si on est quasi perpendiculaire, la projection degenere : on ne touche a rien.
 	if absf(forward.dot(up)) > 0.99:
 		return
-
+	
 	forward = (forward - up * forward.dot(up)).normalized()
 	var right := forward.cross(up).normalized()
 	var target := Basis(right, up, right.cross(up))
-
+	
 	var weight := 1.0 - exp(-speed * delta)
 	global_basis = global_basis.slerp(target, weight).orthonormalized()
+
+
+## Incline le mesh (pas le corps physique) vers l'interieur du virage.
+## yaw est un delta par frame (deja multiplie par delta) : on divise pour
+## retrouver une vitesse de rotation stable, sinon l'angle est ridiculement petit.
+func _update_visuals(yaw: float, delta: float) -> void:
+	var yaw_rate := yaw / delta
+	var max_bank := deg_to_rad(visual_bank_angle_deg)
+	var target := clampf(-yaw_rate * visual_bank_factor, -max_bank, max_bank)
+	var weight := 1.0 - exp(-visual_bank_speed * delta)
+	visual_player.rotation.z = lerp_angle(visual_player.rotation.z, target, weight)
+	visual_scooter.rotation.z = lerp_angle(visual_scooter.rotation.z, target, weight / 2)
