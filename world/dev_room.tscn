@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://160icoug7b3o" path="res://world/dev_room.gd" id="1_devroom"]
 [ext_resource type="Texture2D" uid="uid://5dc5t5hksjax" path="res://world/textures/grid_black.png" id="2_grid"]
 [ext_resource type="PackedScene" uid="uid://bs6eb277gdomf" path="res://mission/mission.tscn" id="2_i7gyh"]
+[ext_resource type="PackedScene" path="res://gui/jump_meter.tscn" id="3_jump"]
+[ext_resource type="PackedScene" uid="uid://dtq45dfa3d6jy" path="res://gui/hud.tscn" id="4_hud"]
 
 [sub_resource type="Environment" id="Environment_9"]
 background_mode = 1
@@ -1239,16 +1241,8 @@ mesh = SubResource("BoxMesh_68")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="K_Batiments/Bat4" unique_id=2003420253]
 shape = SubResource("BoxShape3D_69")
 
-[node name="HUD" type="CanvasLayer" parent="." unique_id=1029148443]
+[node name="HUD" parent="." instance=ExtResource("4_hud")]
 
-[node name="Readout" type="Label" parent="HUD" unique_id=1617536734]
-offset_left = 18.0
-offset_top = 16.0
-offset_right = 460.0
-offset_bottom = 220.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 17
+[node name="JumpMeter" parent="." instance=ExtResource("3_jump")]
 
 [editable path="Missions/Mission1"]

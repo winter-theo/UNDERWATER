@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://briuw714phoor"]
 
 [ext_resource type="Script" uid="uid://dxypwf6ncq3mq" path="res://world/world.gd" id="1_6xmxd"]
+[ext_resource type="PackedScene" uid="uid://dtq45dfa3d6jy" path="res://gui/hud.tscn" id="2_hud"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h5o24"]
 
@@ -92,3 +93,5 @@ transform = Transform3D(1, 0, 0, 0, 0.99846756, 0.055340596, 0, -0.055340596, 0.
 light_color = Color(1, 0.78431374, 0.654902, 1)
 light_energy = 0.5
 shadow_enabled = true
+
+[node name="HUD" parent="." instance=ExtResource("2_hud")]

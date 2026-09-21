@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cjjumij08u3ae" path="res://world/map.gd" id="1_map"]
 [ext_resource type="Texture2D" uid="uid://5dc5t5hksjax" path="res://world/textures/grid_black.png" id="2_grid"]
 [ext_resource type="PackedScene" uid="uid://caoqewiughb0u" path="res://world/meshes/map_test.glb" id="3_mesh"]
-[ext_resource type="PackedScene" uid="uid://dtq45dfa3d6jy" path="res://gui/hud.tscn" id="4_lc8ft"]
+[ext_resource type="PackedScene" uid="uid://dtq45dfa3d6jy" path="res://gui/hud.tscn" id="4_hud"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sol"]
 albedo_color = Color(0.3, 0.38, 0.42, 1)
@@ -46,4 +46,4 @@ transform = Transform3D(24, 0, 0, 0, 24, 0, 0, 0, 24, 0, 0, 0)
 [node name="SpawnPoint" type="Marker3D" parent="Terrain" unique_id=852021679]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -8.75, 5, -8.75)
 
-[node name="HUD" parent="." unique_id=944124844 instance=ExtResource("4_lc8ft")]
+[node name="HUD" parent="." unique_id=726850609 instance=ExtResource("4_hud")]

@@ -36,7 +36,6 @@ const VEHICLE_SCENE := preload("res://vehicle/vehicle.tscn")
 
 @onready var _terrain: Node3D = $Terrain
 @onready var _spawn: Marker3D = $Terrain/SpawnPoint
-@onready var _readout: Label = $HUD/Readout
 
 var _vehicle: Vehicle
 
@@ -147,19 +146,3 @@ func _physics_process(_delta: float) -> void:
 	# le plus probable a 180 km/h.
 	if _vehicle.global_position.y < fall_limit:
 		respawn()
-		return
-
-	_draw_hud()
-
-
-func _draw_hud() -> void:
-	var speed: float = _vehicle.engine.speed
-	var pos := _vehicle.global_position
-
-	_readout.text = "\n".join([
-		"vitesse   %6.1f m/s   (%.0f km/h)" % [speed, speed * 3.6],
-		"etat      %s" % ("sol" if _vehicle.is_on_floor() else "AIR"),
-		"position  %.0f, %.0f, %.0f" % [pos.x, pos.y, pos.z],
-		"",
-		"[R] reset",
-	])

@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://dtq45dfa3d6jy"]
 
+[ext_resource type="Script" path="res://gui/hud.gd" id="1_hud"]
+
 [node name="HUD" type="CanvasLayer" unique_id=944124844]
+script = ExtResource("1_hud")
 
 [node name="Readout" type="Label" parent="." unique_id=774092795]
 offset_left = 18.0

@@ -46,6 +46,9 @@ func _ready() -> void:
 	if _controller == null:
 		_controller = PlayerController.new()
 		add_child(_controller)
+	if _controller is PlayerController:
+		add_to_group(&"player")
+
 
 
 func _physics_process(delta: float) -> void:
