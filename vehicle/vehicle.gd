@@ -50,6 +50,11 @@ func _ready() -> void:
 		add_to_group(&"player")
 
 
+## Applique un boost au moteur. Appele par une plateforme de Boost quand le
+## vehicule passe dessus (voir res://boost/boost.gd).
+func boost(bonus: float, duration: float) -> void:
+	engine.boost(bonus, duration)
+
 
 func _physics_process(delta: float) -> void:
 	_controller.poll()
@@ -73,8 +78,9 @@ func _drive_grounded(delta: float, yaw: float) -> void:
 	_align_to(get_floor_normal(), ground_align_speed, delta)
 	# Composante verticale du vecteur de conduite. C'est CA qui te lance
 	# quand tu quittes la rampe : on la garde a jour tant qu'on est au sol,
-	# donc au moment du decollage elle est deja bonne.
-	airborne.sync_launch(-global_basis.z.y * engine.speed)
+	# donc au moment du decollage elle est deja bonne. On utilise la vitesse
+	# boostee pour que les rampes prises sous boost envoient plus loin.
+	airborne.sync_launch(-global_basis.z.y * engine.drive_speed)
 
 
 ## En l'air : direction attenuee, on se remet a plat et la gravite reprend.
@@ -86,7 +92,7 @@ func _drive_airborne(delta: float, yaw: float) -> void:
 
 ## Compose la velocite finale depuis le cap et la vitesse verticale, puis bouge.
 func _resolve_motion() -> void:
-	var drive := -global_basis.z * engine.speed
+	var drive := -global_basis.z * engine.drive_speed
 	velocity = Vector3(drive.x, airborne.vertical_speed, drive.z)
 	
 	if is_on_floor() and airborne.vertical_speed <= 0.0:
@@ -104,6 +110,8 @@ func _apply_wall_impact() -> void:
 	var head_on := -(-global_basis.z).dot(get_wall_normal())
 	if head_on > 0.9:
 		engine.speed *= 1.0 - head_on
+		# Un mur pris de face tue aussi le boost, sinon on rebondit encore lance.
+		engine.cancel_boost()
 
 
 ## Fait pivoter le vehicule pour que son axe Y suive `up`, en gardant le cap.

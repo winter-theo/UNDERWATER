@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dyh3m5pxat2c6"]
+
+[ext_resource type="Script" uid="uid://bqx7n2kv80r4m" path="res://boost/boost.gd" id="1_boost"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_boost"]
+size = Vector3(4, 3, 4)
+
+[node name="Boost" type="Area3D" unique_id=268467654]
+script = ExtResource("1_boost")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1545145163]
+shape = SubResource("BoxShape3D_boost")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
