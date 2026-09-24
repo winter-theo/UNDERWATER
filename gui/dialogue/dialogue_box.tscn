@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://crm3qvmy315ri"]
+
+[ext_resource type="Script" uid="uid://blwsqmsu7b1os" path="res://gui/dialogue/dialogue_box.gd" id="1_box"]
+
+[node name="DialogueBox" type="CanvasLayer" unique_id=1567434022]
+script = ExtResource("1_box")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1582093848]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -176.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Margin" type="MarginContainer" parent="Panel" unique_id=1105597199]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 14
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin" unique_id=1541374404]
+layout_mode = 2
+
+[node name="Speaker" type="Label" parent="Panel/Margin/VBox" unique_id=1424899326]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.35, 1)
+theme_override_font_sizes/font_size = 20
+text = "Speaker"
+
+[node name="Text" type="Label" parent="Panel/Margin/VBox" unique_id=1192650009]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 18
+text = "Texte de la replique"
+autowrap_mode = 3

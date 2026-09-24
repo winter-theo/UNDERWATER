@@ -24,10 +24,6 @@ Music="*uid://lqfpyl4g3xby"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
-[filesystem]
-
-import/blender/enabled=false
-
 [input]
 
 accelerate={

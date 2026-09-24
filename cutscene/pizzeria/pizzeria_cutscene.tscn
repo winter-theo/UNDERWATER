@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://dqk2fioj4iy77"]
+
+[ext_resource type="PackedScene" uid="uid://dxn8ey4molneh" path="res://cutscene/meshes/Pizzeria.blend" id="1_6720g"]
+[ext_resource type="Script" uid="uid://gpd5vxa6xtrj" path="res://cutscene/cutscene.gd" id="1_gukqs"]
+[ext_resource type="Script" uid="uid://d1ujg8ff4n2b5" path="res://gui/dialogue/dialogue_line.gd" id="2_7mv4w"]
+[ext_resource type="Texture2D" uid="uid://hopg48jj7dxa" path="res://cutscene/meshes/textures/Cook.png" id="2_a1sk1"]
+[ext_resource type="PackedScene" uid="uid://c5q10wkl11nua" path="res://cutscene/meshes/Chef.blend" id="2_oy4us"]
+[ext_resource type="PackedScene" uid="uid://dogng284a8xwh" path="res://player/player.tscn" id="3_a1sk1"]
+[ext_resource type="PackedScene" uid="uid://crm3qvmy315ri" path="res://gui/dialogue/dialogue_box.tscn" id="7_2esbi"]
+
+[sub_resource type="Resource" id="Resource_fs1ng"]
+script = ExtResource("2_7mv4w")
+speaker = "Chef"
+text = "Cette pizza doit être livrée dans deux minutes, smh"
+metadata/_custom_type_script = "uid://d1ujg8ff4n2b5"
+
+[sub_resource type="Resource" id="Resource_qx8dt"]
+script = ExtResource("2_7mv4w")
+speaker = "Sirène"
+text = "Tkt boss"
+metadata/_custom_type_script = "uid://d1ujg8ff4n2b5"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sfs6y"]
+albedo_texture = ExtResource("2_a1sk1")
+
+[sub_resource type="Gradient" id="Gradient_oy4us"]
+offsets = PackedFloat32Array(0.01898734, 0.25949368, 1)
+colors = PackedColorArray(0, 0.54901963, 1, 1, 0.96564883, 0.79094684, 0.20580897, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nm80l"]
+gradient = SubResource("Gradient_oy4us")
+fill_to = Vector2(0.4774775, 0)
+
+[sub_resource type="Environment" id="Environment_oy4us"]
+
+[node name="PizzeriaCutscene" type="Node3D" unique_id=1581640118 node_paths=PackedStringArray("speaker_cameras")]
+script = ExtResource("1_gukqs")
+lines = Array[ExtResource("2_7mv4w")]([SubResource("Resource_fs1ng"), SubResource("Resource_qx8dt")])
+speaker_cameras = {
+"Chef": NodePath("CameraChef"),
+"Sirène": NodePath("CameraPlayer")
+}
+
+[node name="Chef" parent="." unique_id=980805650 instance=ExtResource("2_oy4us")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8064003)
+
+[node name="Skeleton3D" parent="Chef/Armature_Cook" parent_id_path=PackedInt32Array(980805650, 1275941663) index="1" unique_id=915675206]
+bones/0/rotation = Quaternion(-0.17780092, 1.1730999e-07, -2.1195527e-08, 0.98406655)
+bones/1/rotation = Quaternion(0.25116268, -4.7295494e-14, 5.988189e-08, 0.96794486)
+bones/2/rotation = Quaternion(-0.1320055, 0.105565146, -0.70974684, 0.6838787)
+bones/3/rotation = Quaternion(-0.2747908, -0.08943159, -0.13687299, 0.9475008)
+bones/4/rotation = Quaternion(0.49988195, 0.6587819, -0.2568283, 0.50016373)
+bones/5/rotation = Quaternion(0.3133222, -0.030847011, 0.051454853, 0.94775003)
+bones/6/position = Vector3(0.17411633, 0.83044887, 0.11222023)
+bones/6/rotation = Quaternion(0.31484175, -0.050586432, 0.112062864, 0.94114697)
+bones/7/rotation = Quaternion(-0.13200563, -0.10556531, 0.7097467, 0.6838787)
+bones/8/rotation = Quaternion(-0.2747909, 0.089431524, 0.13687299, 0.9475009)
+bones/9/rotation = Quaternion(0.499882, -0.6587818, 0.25682816, 0.5001639)
+bones/10/rotation = Quaternion(0.31332222, 0.030846944, -0.051454823, 0.94775003)
+bones/11/position = Vector3(-0.17411648, 0.83044875, 0.11222038)
+bones/11/rotation = Quaternion(0.3148417, 0.050586376, -0.112062864, 0.94114697)
+bones/12/rotation = Quaternion(0.9951921, 2.5947792e-17, -4.8514944e-17, -0.09794277)
+bones/13/rotation = Quaternion(0.43183115, -7.46382e-18, -3.5036347e-17, 0.90195453)
+bones/14/position = Vector3(0.20910467, 0.60030466, -0.15991862)
+bones/14/rotation = Quaternion(-0.2608851, -0.42066666, -0.3513764, 0.794678)
+bones/15/rotation = Quaternion(-0.02807686, -8.3382465e-09, 0.19226985, 0.98094034)
+bones/16/rotation = Quaternion(-0.05607025, -2.1420419e-07, 0.3839682, 0.9216423)
+bones/17/position = Vector3(-0.20910469, 0.6003046, -0.15991858)
+bones/17/rotation = Quaternion(-0.2608851, 0.42066666, 0.3513764, 0.794678)
+bones/18/rotation = Quaternion(-0.02807687, -1.178705e-09, -0.19226988, 0.98094034)
+bones/19/rotation = Quaternion(-0.056070257, 2.2433233e-07, -0.3839682, 0.9216423)
+bones/20/position = Vector3(0.21122363, 0.32999152, -0.29941016)
+bones/20/rotation = Quaternion(-0.56770736, -0.18190105, -0.5079691, 0.6217618)
+bones/21/rotation = Quaternion(0.028669141, -1.0631628e-07, 0.17940813, 0.98335695)
+bones/22/rotation = Quaternion(0.061231382, -1.4039688e-07, 0.383179, 0.9216423)
+bones/23/position = Vector3(-0.21122363, 0.32999155, -0.29941013)
+bones/23/rotation = Quaternion(-0.5677073, 0.18190113, 0.50796926, 0.6217618)
+bones/24/rotation = Quaternion(0.028669152, 1.2003875e-07, -0.17940822, 0.98335695)
+bones/25/rotation = Quaternion(0.0612314, 1.4447141e-07, -0.383179, 0.9216423)
+
+[node name="waist_2" parent="Chef/Armature_Cook/Skeleton3D" index="0" unique_id=1262215831]
+transform = Transform3D(1, 4.2142695e-17, -1.01646164e-16, 6.1149446e-17, -0.98081446, 0.19494373, -9.1480564e-17, -0.19494373, -0.98081446, 0.010273337, 1.2461545, 0.39875323)
+
+[node name="Cook" parent="Chef/Armature_Cook/Skeleton3D" index="1" unique_id=1459837238]
+surface_material_override/0 = SubResource("StandardMaterial3D_sfs6y")
+
+[node name="CameraPlayer" type="Camera3D" parent="." unique_id=1813524263]
+transform = Transform3D(-0.6360783, 0.17357776, -0.75184786, 0, 0.97437006, 0.22495107, 0.77162457, 0.14308648, -0.61977565, -3.426, 2.663, -1.044)
+fov = 63.6
+
+[node name="CameraChef" type="Camera3D" parent="." unique_id=1018009383]
+transform = Transform3D(0.6441237, 0, -0.7649214, 0, 1, 0, 0.7649214, 0, 0.6441237, -3.444, 2.256, 3.172)
+fov = 63.6
+
+[node name="Pizzeria" parent="." unique_id=188017495 instance=ExtResource("1_6720g")]
+
+[node name="Player" parent="." unique_id=1307531656 instance=ExtResource("3_a1sk1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.010720849, 2.76442)
+
+[node name="AnimationPlayer" parent="Player" index="1" unique_id=764334119]
+autoplay = &""
+
+[node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=481173302]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.3493176, 26.633091)
+light_energy = 2.709
+area_range = 4096.0
+area_attenuation = 0.417
+area_size = Vector2(0.5739422, 0.9106083)
+area_texture = SubResource("GradientTexture2D_nm80l")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=231368033]
+environment = SubResource("Environment_oy4us")
+
+[node name="DialogueBox" parent="." unique_id=1567434022 instance=ExtResource("7_2esbi")]
+
+[editable path="Chef"]
+[editable path="Player"]
