@@ -29,6 +29,7 @@ var _controller: VehicleController
 @onready var visual_player = $Player
 @onready var visual_scooter = $Scooter
 
+@onready var audio_engine: EngineAudio = $Audio/AudioEngine # ajouté par bastien
 
 static func create(controller: VehicleController) -> Vehicle:
 	var vehicle: Vehicle = preload("res://vehicle/vehicle.tscn").instantiate()
@@ -58,10 +59,20 @@ func boost(bonus: float, duration: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	_controller.poll()
+	
+	audio_engine.update(             # ajouté par bastien                  
+		delta,
+		_controller.throttle_axis,
+		engine.speed / engine.max_speed
+	)
 
 	steering.update(delta, _controller.steer_axis)
 	engine.update(delta, _controller.throttle_axis)
 
+	
+	var speed_ratio := engine.speed / (engine.max_speed if engine.speed >= 0.0 else engine.max_reverse_speed)
+	audio_engine.update(delta, _controller.throttle_axis, speed_ratio)
+	
 	var yaw := steering.get_yaw_delta(delta, engine.speed, engine.max_speed)
 	if is_on_floor():
 		_drive_grounded(delta, yaw)
