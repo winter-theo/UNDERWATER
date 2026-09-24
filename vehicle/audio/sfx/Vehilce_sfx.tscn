@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bldunqnp5m1y7"]
+
+[ext_resource type="Script" uid="uid://i04owaqt6hr0" path="res://vehicle/components/vehilce_sfx.gd" id="1_fccai"]
+[ext_resource type="AudioStream" uid="uid://b14878jmf8oj" path="res://vehicle/audio/sfx/collision 2.wav" id="1_ftnlr"]
+[ext_resource type="AudioStream" uid="uid://gagv74h0hpem" path="res://vehicle/audio/sfx/klaxon.wav" id="2_fccai"]
+[ext_resource type="Script" uid="uid://bti6hacy07xe3" path="res://vehicle/audio/sfx/klaxon_sound.gd" id="3_n5mv0"]
+
+[node name="VehicleSfx" type="Node3D" unique_id=1588226721]
+script = ExtResource("1_fccai")
+
+[node name="ImpactCollisionSound" type="Node3D" parent="." unique_id=1602189368]
+
+[node name="Collision2" type="AudioStreamPlayer3D" parent="ImpactCollisionSound" unique_id=1217815999]
+stream = ExtResource("1_ftnlr")
+
+[node name="Collision1" type="AudioStreamPlayer3D" parent="ImpactCollisionSound" unique_id=798131368]
+stream = ExtResource("1_ftnlr")
+
+[node name="KlaxonSound" type="Node3D" parent="." unique_id=1248899064]
+script = ExtResource("3_n5mv0")
+
+[node name="Klaxon" type="AudioStreamPlayer3D" parent="KlaxonSound" unique_id=346182502]
+stream = ExtResource("2_fccai")

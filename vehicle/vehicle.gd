@@ -29,7 +29,11 @@ var _controller: VehicleController
 @onready var visual_player = $Player
 @onready var visual_scooter = $Scooter
 
-@onready var audio_engine: EngineAudio = $Audio/AudioEngine # ajouté par bastien
+# Façade de l'audio du moteur du véhicule 
+@onready var audio_engine: EngineAudio = $Audio/AudioEngine 
+# Façade de l'audio du véhicule (klaxon, collisions…)
+@onready var vehicle_sfx := $Audio/VehicleSfx 
+
 
 static func create(controller: VehicleController) -> Vehicle:
 	var vehicle: Vehicle = preload("res://vehicle/vehicle.tscn").instantiate()
@@ -60,12 +64,10 @@ func boost(bonus: float, duration: float) -> void:
 func _physics_process(delta: float) -> void:
 	_controller.poll()
 	
-	audio_engine.update(             # ajouté par bastien                  
-		delta,
-		_controller.throttle_axis,
-		engine.speed / engine.max_speed
-	)
-
+	# Klaxon : poll() vient de lire la touche
+	if _controller.klaxon_pressed:
+		vehicle_sfx.play_klaxon()
+	
 	steering.update(delta, _controller.steer_axis)
 	engine.update(delta, _controller.throttle_axis)
 
