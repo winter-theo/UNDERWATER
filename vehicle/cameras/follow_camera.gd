@@ -24,6 +24,11 @@ extends Camera3D
 ## proportionnel a la vitesse (environ vitesse / follow_speed metres).
 @export var max_lag := 1.4
 
+## Distance minimale derriere le vehicule, en multiples de `distance`.
+## Plancher dur : en marche arriere le vehicule fonce vers la camera, et le
+## lissage le laisse passer dessous puis sortir du cadre.
+@export var min_lag := 0.8
+
 ## FOV de repos. 70 cadre bien ; au-dela de 80 tout parait lointain.
 @export var fov_base := 70.0
 
@@ -78,14 +83,23 @@ func _physics_process(delta: float) -> void:
 		fov = lerpf(fov, _base_fov + ratio * fov_speed_boost, 1.0 - exp(-4.0 * delta))
 
 
-## Ramene la camera si le lissage l'a laissee decrocher.
+## Ramene la camera si le lissage l'a laissee decrocher, ou si le vehicule
+## lui fonce dessus (marche arriere).
 func _clamp_lag() -> void:
 	var offset := global_position - _pivot.global_position
+
+	# Plancher : on mesure le recul le long de l'axe arriere du vehicule,
+	# pas la distance brute, sinon la camera peut glisser sur le cote.
+	var back := -_flat_forward()
+	var behind := offset.x * back.x + offset.z * back.z
+	var floor_dist := distance * min_lag
+	if behind < floor_dist:
+		offset += back * (floor_dist - behind)
+
 	var flat := Vector2(offset.x, offset.z)
 	var limit := distance * max_lag
-	if flat.length() <= limit:
-		return
-	flat = flat.normalized() * limit
+	if flat.length() > limit:
+		flat = flat.normalized() * limit
 	global_position = _pivot.global_position + Vector3(flat.x, offset.y, flat.y)
 
 
