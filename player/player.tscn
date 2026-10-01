@@ -247,6 +247,7 @@ blend_shape_mode = 0
 [sub_resource type="Animation" id="Animation_qdoyd"]
 resource_name = "Mermaid_Idle"
 length = 2.0
+loop_mode = 1
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
