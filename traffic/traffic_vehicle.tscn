@@ -1,0 +1,37 @@
+[gd_scene format=3]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bean"]
+radius = 0.9
+height = 3.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bean"]
+albedo_color = Color(0.95, 0.5, 0.2, 1)
+roughness = 0.6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bean"]
+material = SubResource("StandardMaterial3D_bean")
+radius = 0.9
+height = 3.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_visor"]
+albedo_color = Color(0.08, 0.12, 0.16, 1)
+roughness = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_visor"]
+material = SubResource("StandardMaterial3D_visor")
+radius = 0.55
+height = 0.5
+
+[node name="TrafficVehicle" type="AnimatableBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_bean")
+
+[node name="Bean" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.9, 0)
+mesh = SubResource("CapsuleMesh_bean")
+
+[node name="Visor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.6428, 0.766, 0, -0.766, 0.6428, 0, 1.48, -1.59)
+mesh = SubResource("SphereMesh_visor")
