@@ -1,6 +1,6 @@
 extends Node3D
 
-## Scene de jeu principale : la vraie map, chargee depuis map_test.glb.
+## Script commun des maps chargees depuis un GLB (test_map_niels, test_map_theo_nyc).
 ##
 ## Le GLB sorti de Blender n'a ni materiau ni collision, et son depliage UV est
 ## trop irregulier pour poser une grille dessus (la densite de texels varie d'un
