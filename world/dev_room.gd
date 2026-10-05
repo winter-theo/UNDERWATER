@@ -25,3 +25,5 @@ func _unhandled_input(event: InputEvent) -> void:
 	# encore dans project.godot.
 	if InputMap.has_action(&"reset") and event.is_action_pressed(&"reset"):
 		_respawn()
+	if event.is_action_pressed(&"ui_cancel"):
+		get_tree().quit()

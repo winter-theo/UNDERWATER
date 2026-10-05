@@ -17,8 +17,13 @@ config/icon="res://icon.svg"
 
 [display]
 
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[filesystem]
+
+import/blender/enabled=false
 
 [input]
 
