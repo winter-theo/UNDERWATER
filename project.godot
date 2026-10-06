@@ -23,7 +23,7 @@ window/stretch/aspect="expand"
 
 [filesystem]
 
-import/blender/enabled=false
+import/blender/enabled=true
 
 [input]
 
