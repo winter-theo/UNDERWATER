@@ -13,17 +13,13 @@ config_version=5
 config/name="Delivery Mermaid"
 run/main_scene="res://world/dev_room.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://b6xjp0ljx8dwi"
 
 [display]
 
 window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-
-[filesystem]
-
-import/blender/enabled=true
 
 [input]
 
