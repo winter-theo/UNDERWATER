@@ -1,7 +1,7 @@
 extends Node3D
 class_name Mission
 
-var finished = false
+signal finished
 
 func finish() -> void:
-	finished = true
+	finished.emit()
