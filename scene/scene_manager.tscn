@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cu2lr1maupc3i"]
+
+[ext_resource type="Script" uid="uid://ds1d6mtc277jk" path="res://scene/scene_manager.gd" id="1_2hjau"]
+[ext_resource type="Script" uid="uid://card5vhib8k8p" path="res://scene/scene_loader.gd" id="2_bsxii"]
+
+[node name="SceneManager" type="Node2D" unique_id=2086213115]
+script = ExtResource("1_2hjau")
+
+[node name="SceneLoader" type="Node" parent="." unique_id=1179302197]
+script = ExtResource("2_bsxii")
+metadata/_custom_type_script = "uid://card5vhib8k8p"
