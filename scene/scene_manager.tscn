@@ -2,9 +2,12 @@
 
 [ext_resource type="Script" uid="uid://ds1d6mtc277jk" path="res://scene/scene_manager.gd" id="1_2hjau"]
 [ext_resource type="Script" uid="uid://card5vhib8k8p" path="res://scene/scene_loader.gd" id="2_bsxii"]
+[ext_resource type="Script" uid="uid://cq1mhijm2a5tl" path="res://scene/act.gd" id="2_juqc8"]
+[ext_resource type="Resource" uid="uid://c5137ly01gopa" path="res://scene/acts/act_dev_room.tres" id="3_m7cxr"]
 
-[node name="SceneManager" type="Node2D" unique_id=2086213115]
+[node name="SceneManager" type="Node" unique_id=188259338]
 script = ExtResource("1_2hjau")
+acts = Array[ExtResource("2_juqc8")]([ExtResource("3_m7cxr")])
 
 [node name="SceneLoader" type="Node" parent="." unique_id=1179302197]
 script = ExtResource("2_bsxii")

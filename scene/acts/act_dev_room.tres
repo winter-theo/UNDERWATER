@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Act" format=3 uid="uid://c5137ly01gopa"]
+
+[ext_resource type="Script" uid="uid://cq1mhijm2a5tl" path="res://scene/act.gd" id="1_84l46"]
+
+[resource]
+script = ExtResource("1_84l46")
+title = "Dev Room"
+chef_scene_path = "uid://b2gb5hdhqf3eg"
+metadata/_custom_type_script = "uid://cq1mhijm2a5tl"
