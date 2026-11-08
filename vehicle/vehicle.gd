@@ -22,6 +22,9 @@ extends CharacterBody3D
 
 var _controller: VehicleController
 
+# Était-on contre un mur à l'image précédente ? Sert à détecter le DÉBUT d'un choc.
+var _was_on_wall := false
+
 @onready var steering: VehicleSteering = $Components/VehicleSteering
 @onready var engine: VehicleEngine = $Components/VehicleEngine
 @onready var airborne: VehicleAirborne = $Components/VehicleAirborne
@@ -112,7 +115,12 @@ func _resolve_motion() -> void:
 		velocity.y -= airborne.ground_stick
 	
 	_apply_wall_impact()
+	
+	# On garde la vitesse AVANT le mouvement : après move_and_slide(),
+	# elle est déjà modifiée par la collision et on ne pourrait plus mesurer le choc.
+	var velocity_before := velocity
 	move_and_slide()
+	_check_collision_sound(velocity_before)
 
 
 ## Freine le moteur quand on percute un mur de face, proportionnellement a
@@ -125,6 +133,29 @@ func _apply_wall_impact() -> void:
 		engine.speed *= 1.0 - head_on
 		# Un mur pris de face tue aussi le boost, sinon on rebondit encore lance.
 		engine.cancel_boost()
+
+
+## Détecte un NOUVEAU choc contre un mur et joue le son selon sa force.
+func _check_collision_sound(velocity_before: Vector3) -> void:
+	var on_wall := is_on_wall()
+	
+	# On ne réagit qu'au moment où le contact commence :
+	# rester collé ou frotter contre un mur ne relance pas le son.
+	if on_wall and not _was_on_wall:
+		var impact := 0.0
+		for i in get_slide_collision_count():
+			var normal := get_slide_collision(i).get_normal()
+			# Normale trop verticale = sol ou plafond : on ignore
+			if absf(normal.y) > 0.7:
+				continue
+			# Vitesse qui "rentre" dans le mur : maximale de face, faible en rasant
+			impact = maxf(impact, -velocity_before.dot(normal))
+		
+		# Force ramenée entre 0 et 1 par rapport à la vitesse max
+		var strength := clampf(impact / engine.max_speed, 0.0, 1.0)
+		vehicle_sfx.play_impact(strength)
+	
+	_was_on_wall = on_wall
 
 
 ## Fait pivoter le vehicule pour que son axe Y suive `up`, en gardant le cap.

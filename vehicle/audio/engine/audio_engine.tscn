@@ -26,33 +26,44 @@ script = ExtResource("1_sxv8o")
 
 [node name="EngineRpm0" type="AudioStreamPlayer3D" parent="." unique_id=811426897]
 stream = ExtResource("2_1ukmc")
+bus = &"Engine"
 
 [node name="EngineRpm10" type="AudioStreamPlayer3D" parent="." unique_id=666316587]
 stream = ExtResource("3_addhs")
+bus = &"Engine"
 
 [node name="EngineRpm20" type="AudioStreamPlayer3D" parent="." unique_id=145797327]
 stream = ExtResource("4_gxwfn")
+bus = &"Engine"
 
 [node name="EngineRpm30" type="AudioStreamPlayer3D" parent="." unique_id=106929651]
 stream = ExtResource("5_dms18")
+bus = &"Engine"
 
 [node name="EngineRpm40" type="AudioStreamPlayer3D" parent="." unique_id=1669914654]
 stream = ExtResource("6_aihmu")
+bus = &"Engine"
 
 [node name="EngineRpm50" type="AudioStreamPlayer3D" parent="." unique_id=1812396816]
 stream = ExtResource("3_7r7e1")
+bus = &"Engine"
 
 [node name="EngineRpm60" type="AudioStreamPlayer3D" parent="." unique_id=255545133]
 stream = ExtResource("8_3rjwx")
+bus = &"Engine"
 
 [node name="EngineRpm70" type="AudioStreamPlayer3D" parent="." unique_id=2014861759]
 stream = ExtResource("9_viqn8")
+bus = &"Engine"
 
 [node name="EngineRpm80" type="AudioStreamPlayer3D" parent="." unique_id=665648104]
 stream = ExtResource("11_oytiy")
+bus = &"Engine"
 
 [node name="EngineRpm90" type="AudioStreamPlayer3D" parent="." unique_id=2060437600]
 stream = ExtResource("5_n78wp")
+bus = &"Engine"
 
 [node name="EngineRpm100" type="AudioStreamPlayer3D" parent="." unique_id=1276985899]
 stream = SubResource("AudioStreamWAV_c48wf")
+bus = &"Engine"
