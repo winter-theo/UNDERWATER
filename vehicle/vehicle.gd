@@ -4,24 +4,20 @@ extends CharacterBody3D
 ## Vitesse a laquelle le vehicule s'aligne sur la normale du sol.
 ## Haut = colle aux rampes tout de suite. Trop haut = saccade sur les aretes.
 @export var ground_align_speed := 18.0
-
 ## Vitesse a laquelle le vehicule se remet a plat en l'air.
 @export var air_align_speed := 3.0
-
 ## Fraction du controle de direction conservee en l'air (0 = aucun).
 @export var air_steer_factor := 0.35
-
 ## Inclinaison visuelle max (degres) quand le vehicule tourne a fond.
 @export var visual_bank_angle_deg := 20.0
-
 ## Sensibilite : multiplie la vitesse de rotation (rad/s) pour obtenir l'angle cible.
 @export var visual_bank_factor := 0.3
-
 ## Vitesse de lissage de l'inclinaison visuelle.
 @export var visual_bank_speed := 6.0
 
 var _controller: VehicleController
 
+@onready var audio_engine: EngineAudio = $Audio/AudioEngine
 @onready var steering: VehicleSteering = $Components/VehicleSteering
 @onready var engine: VehicleEngine = $Components/VehicleEngine
 @onready var airborne: VehicleAirborne = $Components/VehicleAirborne
@@ -29,26 +25,14 @@ var _controller: VehicleController
 @onready var visual_player = $Player
 @onready var visual_scooter = $Scooter
 
-@onready var audio_engine: EngineAudio = $Audio/AudioEngine # ajouté par bastien
 
 static func create(controller: VehicleController) -> Vehicle:
 	var vehicle: Vehicle = preload("res://vehicle/vehicle.tscn").instantiate()
 	vehicle._controller = controller
-	# Le controller devient enfant du vehicule, donc il est libere avec lui.
-	# Sans ca, un PlayerController.new() reste orphelin en memoire pour toujours.
-	if controller.get_parent() == null:
-		vehicle.add_child(controller)
+	vehicle.add_child(controller)
+	if controller is PlayerController:
+		vehicle.add_to_group(&"player")
 	return vehicle
-
-
-func _ready() -> void:
-	# Si personne n'a injecte de controller, on en fabrique un.
-	# instantiate() direct -> joueur. create() -> PNJ livreurs plus tard.
-	if _controller == null:
-		_controller = PlayerController.new()
-		add_child(_controller)
-	if _controller is PlayerController:
-		add_to_group(&"player")
 
 
 ## Applique un boost au moteur. Appele par une plateforme de Boost quand le
@@ -60,27 +44,20 @@ func boost(bonus: float, duration: float) -> void:
 func _physics_process(delta: float) -> void:
 	_controller.poll()
 	
-	audio_engine.update(             # ajouté par bastien                  
-		delta,
-		_controller.throttle_axis,
-		engine.speed / engine.max_speed
-	)
-
 	steering.update(delta, _controller.steer_axis)
 	engine.update(delta, _controller.throttle_axis)
+	audio_engine.update(delta, _controller.throttle_axis, engine.speed_ratio)
+	
+	_handle_yaw(delta, steering.get_yaw_delta(delta, engine.speed, engine.max_speed))
+	_resolve_motion()
 
-	
-	var speed_ratio := engine.speed / (engine.max_speed if engine.speed >= 0.0 else engine.max_reverse_speed)
-	audio_engine.update(delta, _controller.throttle_axis, speed_ratio)
-	
-	var yaw := steering.get_yaw_delta(delta, engine.speed, engine.max_speed)
+
+func _handle_yaw(delta: float, yaw: float) -> void:
 	if is_on_floor():
 		_drive_grounded(delta, yaw)
 	else:
 		_drive_airborne(delta, yaw)
-	
 	_update_visuals(yaw, delta)
-	_resolve_motion()
 
 
 ## Au sol : on suit la pente et on garde la vitesse de decollage a jour.

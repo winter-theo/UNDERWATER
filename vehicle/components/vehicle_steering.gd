@@ -1,9 +1,9 @@
 class_name VehicleSteering
 extends Node
 
-@export var _max_steering_angle_deg := 30.0
-@export var _steering_speed_deg := 190.0
-@export var _return_speed_deg := 180.0
+@export var _max_steering_angle_deg := 20.0
+@export var _steering_speed_deg := 120.0
+@export var _return_speed_deg := 120.0
 
 @onready var _max_steering_angle := deg_to_rad(_max_steering_angle_deg)
 @onready var _steering_speed := deg_to_rad(_steering_speed_deg)

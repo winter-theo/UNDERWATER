@@ -23,6 +23,11 @@ var boost_speed := 0.0
 ## alignes garde le vehicule a la vitesse max boostee, facon Mario Kart.
 var _boost_hold := 0.0
 
+## Ratio de vitesse en fonction de si on est en marche arrière ou pas
+var speed_ratio: float:
+	get:
+		return speed / (max_speed if speed >= 0.0 else max_reverse_speed)
+
 ## Vitesse reellement transmise au vehicule : moteur + boost.
 var drive_speed: float:
 	get:
